@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+//  =====================================================================
+// ====================== Define Structure Shose ========================
+// ======================================================================
 struct shoes
 {
     int id;
@@ -126,7 +129,7 @@ NODE *FindId(LIST ds, int id)
     for (NODE *p = ds.pHead; p != NULL; p = p->next)
     {
         if (p->data.id == id)
-        {
+        {   
             return p;
         }
     }
@@ -163,6 +166,7 @@ void XoaCuoi(LIST &ds)
     Print(ds);
 }
 
+// ====================== End Manage Shose ============================
 int main()
 {
 

@@ -2,21 +2,23 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct shoes
+
+// ======================================================================
+// *                      Define Structure Brand                        *
+// ======================================================================
+
+struct brand    
 {
     int id;
     char name[20];
-    char brand[20];
-    int price;
-    int numberRemain;
-    int numberSold;
-    char hk[15];
+    int amount;
+    int numberBrand;
 };
-typedef struct shoes SHOES;
+typedef struct brand BRAND;
 
 struct node
 {
-    SHOES data;
+    BRAND data;
     node *next;
 };
 typedef struct node NODE;
@@ -41,7 +43,7 @@ int checkNULL(LIST ds)
     }
     return 0;
 }
-NODE *initNode(SHOES x)
+NODE *initNode(BRAND x)
 {
     NODE *p;
     p = new NODE;
@@ -72,25 +74,19 @@ void Enter(LIST &ds, int n)
     printf("Enter INFORMATION OF SHOSE\n");
     for (int i = 0; i < n; i++)
     {
-        SHOES x;
+        BRAND x;
         printf("Enter ID : ");
         fflush(stdin);
         scanf("%d", &x.id);
         printf("Enter Name: ");
         fflush(stdin);
         gets(x.name);
-        printf("Enter Brand : ");
+        printf("Enter amount of shose: ");
         fflush(stdin);
-        gets(x.brand);
-        printf("Enter Price : ");
+        scanf("%d", &x.amount);
+        printf("Enter Number Brand : ");
         fflush(stdin);
-        scanf("%d", &x.price);
-        printf("Enter Number Remaining : ");
-        fflush(stdin);
-        scanf("%d", &x.numberRemain);
-        printf("Enter Number of Products Sold : ");
-        fflush(stdin);
-        scanf("%d", &x.numberSold);
+        scanf("%d", &x.numberBrand);
         printf("\n \n");
         NODE *p = new NODE;
         p = initNode(x);
@@ -101,19 +97,8 @@ void Print(LIST ds)
 {
     for (NODE *p = ds.pHead; p != NULL; p = p->next)
     {
-        printf("%d\t %s\t %s\t %d\t %d\t %d\t %s\n",
-               p->data.id, p->data.name, p->data.brand, p->data.price, p->data.numberRemain, p->data.numberSold, p->data.hk);
-    }
-}
-void SVD13CNPM(LIST ds)
-{
-    for (NODE *p = ds.pHead; p != NULL; p = p->next)
-    {
-        if (strcmp(p->data.brand, "D13CNPM") == 0)
-        {
-            printf("%d\t %s\t %s\t %d\t %d\t %d\t %s\n",
-                   p->data.id, p->data.name, p->data.brand, p->data.price, p->data.numberRemain, p->data.numberSold, p->data.hk);
-        }
+        printf("%d\t |%s\t |%d\t |%d\t \n",
+               p->data.id, p->data.name, p->data.amount, p->data.numberBrand);
     }
 }
 
@@ -122,7 +107,7 @@ NODE *FindId(LIST ds, int id)
     for (NODE *p = ds.pHead; p != NULL; p = p->next)
     {
         if (p->data.id == id)
-        {
+        {   
             return p;
         }
     }
@@ -137,7 +122,7 @@ void Sort(LIST &ds)
         {
             if (p->data.id > q->data.id)
             {
-                SHOES x = p->data;
+                BRAND x = p->data;
                 p->data = q->data;
                 q->data = x;
             }
@@ -157,4 +142,53 @@ void XoaCuoi(LIST &ds)
         }
     }
     Print(ds);
+}
+
+int main()
+{
+
+    LIST ds;
+    int n;
+
+    int status;
+    while (1)
+    {
+        printf("1-> Enter data\n");
+        printf("2-> Find\n");
+        printf("3-> Print Payment\n");
+        printf("4-> Turnover\n");
+        printf("0-> Out program\n");
+        scanf("%d", &status);
+        if (status == 1)
+        {
+            printf("Enter N: ");
+            scanf("%d", &n);
+            init(ds);
+            Enter(ds, n);
+            printf("\nDANH SACH HANG\n");
+            Print(ds);
+        }
+        else if (status == 2)
+        {
+            printf("\nTINH NANG DANG GIAI DOAN PHAT TRIEN \n");
+            printf("====================================== \n \n");
+            continue;
+        }
+        else if (status == 3)
+        {
+            printf("\nTINH NANG DANG GIAI DOAN PHAT TRIEN \n");
+            printf("====================================== \n \n");
+            continue;
+        }
+        else if (status == 4)
+        {
+            printf("\nTINH NANG DANG GIAI DOAN PHAT TRIEN \n");
+            printf("====================================== \n \n");
+            continue;
+        }
+        else
+        {
+            break;
+        }
+    }
 }
