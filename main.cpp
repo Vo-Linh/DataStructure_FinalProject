@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-//  =====================================================================
-// ====================== Define Structure Shose ========================
+#include <cctype>
+using namespace std;
+// ======================================================================
+// *                      Define Structure Shose                        *
 // ======================================================================
 struct shoes
 {
@@ -76,6 +77,7 @@ void Enter(LIST &ds, int n)
     for (int i = 0; i < n; i++)
     {
         SHOES x;
+        char brand[20];
         printf("Enter ID : ");
         fflush(stdin);
         scanf("%d", &x.id);
@@ -85,6 +87,7 @@ void Enter(LIST &ds, int n)
         printf("Enter Brand : ");
         fflush(stdin);
         gets(x.brand);
+        // x.brand = (char)tolower(brand); // convert to lower
         printf("Enter Price ($): ");
         fflush(stdin);
         scanf("%d", &x.price);
@@ -113,10 +116,13 @@ void Print(LIST ds)
 }
 // ========== XXX print base on brand ===============
 void printBrand(LIST ds)
-{
+{   
+    char brand[10];
+    printf("Nhap brand can hien thi: ");
+    gets(brand);
     for (NODE *p = ds.pHead; p != NULL; p = p->next)
     {
-        if (strcmp(p->data.brand, "Nike") == 0)
+        if (strcmp(p->data.brand, brand) == 0)
         {
             printf("%d\t %s\t %s\t %d\t %d\t %d\t %s\n",
                    p->data.id, p->data.name, p->data.brand, p->data.price, p->data.numberRemain, p->data.numberSold, p->data.hk);
@@ -129,7 +135,7 @@ NODE *FindId(LIST ds, int id)
     for (NODE *p = ds.pHead; p != NULL; p = p->next)
     {
         if (p->data.id == id)
-        {   
+        {
             return p;
         }
     }
@@ -174,48 +180,84 @@ int main()
     int n;
 
     int status;
-    while (1)
+    printf("1-> Product\n");
+    printf("2-> Brand\n");
+    printf("3-> Customer\n");
+    printf("4-> Business\n");
+    printf("0-> Out program\n");
+    scanf("%d", &status);
+    switch (status)
     {
-        printf("1-> Enter data\n");
-        printf("2-> Find\n");
-        printf("3-> Print Payment\n");
-        printf("4-> Turnover\n");
-        printf("0-> Out program\n");
-        scanf("%d", &status);
-        if (status == 1)
+    case 1:
+
+        while (1)
         {
-            printf("Enter N: ");
-            scanf("%d", &n);
-            init(ds);
-            Enter(ds, n);
-            printf("\nDANH SACH GIAY\n");
-            Print(ds);
-            printf("\nDANH SACH GIAY THEO BRAND\n");
-            printBrand(ds);
-            printf("\nDANH SACH GIAY SAP XEP THEO MA\n");
-            Sort(ds);
-        }
-        else if (status == 2)
-        {
-            printf("\nTINH NANG DANG GIAI DOAN PHAT TRIEN \n");
-            printf("====================================== \n \n");
-            continue;
-        }
-        else if (status == 3)
-        {
-            printf("\nTINH NANG DANG GIAI DOAN PHAT TRIEN \n");
-            printf("====================================== \n \n");
-            continue;
-        }
-        else if (status == 4)
-        {
-            printf("\nTINH NANG DANG GIAI DOAN PHAT TRIEN \n");
-            printf("====================================== \n \n");
-            continue;
-        }
-        else
-        {
-            break;
-        }
+            printf("======================== Product ========================\n");
+            printf("1-> Enter data\n");
+            printf("2-> Find\n");
+            printf("3-> Print Data\n");
+            printf("0-> Out program\n");
+            scanf("%d", &status);
+
+            if (status == 1)
+            {
+                printf("Enter N: ");
+                scanf("%d", &n);
+                init(ds);
+                Enter(ds, n);
+
+                printf("\nDANH SACH GIAY THEO BRAND\n");
+                printBrand(ds);
+                printf("\nDANH SACH GIAY SAP XEP THEO MA\n");
+                Sort(ds);
+            }
+            else if (status == 2)
+            {
+                
+                if ( checkNULL(ds) == 0)
+                {
+                    printf("\nDANH SACH GIAY\n");
+                    Print(ds);
+                }
+                else
+                {
+                    printf("Please Enter data\n");
+                }
+                continue;
+            }
+            else if (status == 3)
+            {
+                if ( checkNULL(ds) == 0)
+                {
+                    printf("\nDANH SACH GIAY THEO BRAND\n");
+                    printBrand(ds);
+                }
+                else
+                {
+                    printf("Please Enter data\n");
+                }
+                
+                continue;
+            }
+            else
+            {
+                break;
+            }
+        };
+        break;
+    case 2:
+        printf("======================== Brand ========================\n");
+        printf("TINH NANG DANG PHAT TRIEN, VUI LONG THU LAI SAU\n");
+        break;
+    case 3: 
+        printf("======================== Customer ======================\n");
+        printf("TINH NANG DANG PHAT TRIEN, VUI LONG THU LAI SAU\n");
+        break;
+    case 4: 
+        printf("======================== Business ======================\n");
+        printf("TINH NANG DANG PHAT TRIEN, VUI LONG THU LAI SAU\n");
+        break;
+    default:
+        break;
     }
 }

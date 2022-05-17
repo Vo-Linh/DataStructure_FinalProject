@@ -19,7 +19,7 @@ using namespace std;
     int money;
 };
 typedef struct customers CUSTOMERS;
-/* A binary tree node structure */
+
 struct node {
     CUSTOMERS data;
     struct node* left;
@@ -83,7 +83,6 @@ void binaryTreeToBST(struct node* root)
  
     qsort(arr, n, sizeof(arr[0]), compare);
  
-    // Copy array elements back to Binary Tree
     i = 0;
     arrayToBST(arr, root, &i);
     delete[] arr;
@@ -103,34 +102,10 @@ void printInorder(struct node* node)
     if (node == NULL)
         return;
  
-    /* first recur on left child */
+
     printInorder(node->left);
- 
-    /* then print the data of node */
+
     cout <<" "<< node->data;
  
-    /* now recur on right child */
     printInorder(node->right);
-}
-
-int payment(int amountBrand)
-{
-    int idx[amountBrand];
-    int amount[amountBrand];
-    int total;
-    
-    for (int i = 0; i <= amountBrand; i++)
-    {
-        printf("Enter id");
-        scanf("%d", &idx[i]);
-        printf("Enter Amount");
-        scanf("%d", &amount[i]);
-    }
-
-    for (int i = 0; i < amountBrand; i++)
-    {
-        //  total = amount[i]*FindId(idx[i]);
-    }
-
-    return total;
 }
