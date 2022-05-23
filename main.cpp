@@ -262,7 +262,7 @@ void shose2brand(LIST_BRAND dsBrand, LIST_SHOSE dsShose)
         current[count] = p->data.brand;
         count++;
     }
-    sort(current, current + count);
+    //sort(current, current + count);
     //  Delete emlement same value
     for (int i = 0; i < count; i++)
     {
