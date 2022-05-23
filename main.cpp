@@ -149,7 +149,7 @@ int checkNULL(LIST_SHOSE ds)
 
 void sortShose(LIST_SHOSE &ds)
 {
-    NODE_SHOSE *p, *q; // init 
+    NODE_SHOSE *p, *q; // init
     for (p = ds.pHead; p != ds.pTail; p = p->next)
     {
         for (q = p->next; q != NULL; q = q->next)
@@ -279,8 +279,10 @@ void shose2brand(LIST_BRAND dsBrand, LIST_SHOSE dsShose)
             }
         }
     }
+    printf("ID\t |Name\t |Number\t \n");
+    printf("-------------------------\n");
     for (int i = 0; i < count; i++)
-    {   
+    {
         BRAND x;
         int c = 0;
         strcpy(x.name, current[i].c_str());
@@ -293,7 +295,7 @@ void shose2brand(LIST_BRAND dsBrand, LIST_SHOSE dsShose)
         }
         x.numberBrand = c;
         x.id = i;
-        
+
         printf("%d\t |%s\t |%d\t \n", x.id, x.name, x.numberBrand);
         NODE_BRAND *ptr = new NODE_BRAND;
         ptr = initBrand(x);
@@ -336,20 +338,18 @@ customer inputItem()
     customer x;
     char id[20];
     printf("Enter id of customer : ");
+    fflush(stdin);
     gets(x.id);
 
-    if (strcmp(x.id, "q") == 0 || strcmp(x.id, "Q") == 0)
-    {
-        return x;
-    }
-
     printf("Enter name of customer: ");
+    fflush(stdin);
     gets(x.name);
 
     printf("Enter money($):");
+    fflush(stdin);
     scanf("%lf", &x.money);
 
-    //fflush(stdin);
+    fflush(stdin);
     while (getchar() != '\n')
         ;
 
@@ -383,16 +383,13 @@ int insertNode(Tree &T, customer x) // chen 1 Node vao cay
 void CreateTree(Tree &T)
 {
     customer x;
-    while (1)
-    {
-        printf("Enter a customer \n: ");
-        x = inputItem();
-        int check = insertNode(T, x);
-        if (check == -1)
-            printf("Tree is exits!");
-        else if (check == 0)
-            printf("Memory full");
-    }
+    printf("Enter a customer \n: ");
+    x = inputItem();
+    int check = insertNode(T, x);
+    if (check == -1)
+        printf("Tree is exits!");
+    else if (check == 0)
+        printf("Memory full");
 }
 
 // Duyet theo LNR
@@ -406,7 +403,7 @@ void LNR(Tree T)
     }
 }
 
-Node *searchMoney(Tree T, int money) 
+Node *searchMoney(Tree T, int money)
 {
     if (T != NULL)
     {
@@ -469,7 +466,6 @@ int main()
     LIST_BRAND dsBrand;
     Tree T;
     T = NULL;
-    
 
     int n;
     int status;
@@ -549,8 +545,6 @@ int main()
             {
                 CreateTree(T);
                 customer x;
-                printf("Enter id of customer to add: ");
-                x = inputItem();
                 if (insertNode(T, x) == -1)
                 {
                     printf("add failt!");
